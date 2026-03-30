@@ -152,14 +152,20 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              {/* Map embed */}
-              <div id="map" className="rounded-2xl overflow-hidden border border-taupe/30 shadow-lg" style={{ height: 250 }}>
+              {/* Map — OpenStreetMap (free, no API key) */}
+              <div id="map" className="rounded-2xl overflow-hidden border border-taupe/30 shadow-lg" style={{ height: 280 }}>
                 <iframe
-                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAXeXFZ2mcnJxhYJK9_K-TMewqJMmEOEHk&q=Manglam+Aananda+Sanganer+Jaipur&zoom=14`}
-                  width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
-                  title="Furnshin Location — Sanganer, Jaipur"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=75.7509%2C26.7873%2C75.7659%2C26.7973&layer=mapnik&marker=26.7923%2C75.7559"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "sepia(20%) saturate(80%)" }}
+                  loading="lazy"
+                  title="Furnshin — 201 Petunia, Manglam Aananda, Sanganer, Jaipur 302020"
                 />
               </div>
+              <p className="text-xs text-text-dark/40 mt-2 text-center">
+                201 Petunia, Manglam Aananda, Sanganer, Jaipur 302020
+              </p>
             </motion.div>
           </div>
         </div>

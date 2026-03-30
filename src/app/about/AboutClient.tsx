@@ -14,12 +14,12 @@ const values = [
 ];
 
 const milestones = [
-  { year: "1996", event: "Founded in Jaipur, Rajasthan with a focus on quality furnishing and metal fabrication." },
-  { year: "2005", event: "Expanded into full interior decoration and glass work solutions for residential clients." },
-  { year: "2012", event: "Entered commercial projects — office fitouts, retail interiors, and restaurant design." },
-  { year: "2018", event: "Launched aluminum solutions division — windows, doors, and architectural facades." },
-  { year: "2024", event: "Crossed 50+ documented projects. Began digital presence establishment." },
-  { year: "2026", event: "Launched furnshin.com — the complete digital platform for online presence and lead generation." },
+  { year: "1996", event: "Founded in Jaipur with a focus on custom metal fabrication and high-finish wood furniture." },
+  { year: "2005", event: "Shifted to turnkey residential interiors, completing our 100th project in the Jaipur market." },
+  { year: "2012", event: "Expanded into high-precision commercial glass work and complex office fit-outs." },
+  { year: "2018", event: "Launched structural aluminum solutions division for high-performance architectural glazing." },
+  { year: "2023", event: "Crossed the milestone of 500+ luxury spaces transformed across Rajasthan." },
+  { year: "2026", event: "Digital platform launch to serve as the primary gateway for Jaipur's design-conscious homeowners." },
 ];
 
 export default function AboutClient() {

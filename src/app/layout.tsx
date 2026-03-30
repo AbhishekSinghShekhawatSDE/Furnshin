@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { BRAND } from "@/lib/brand";
+import { BRAND, SEO_DEFAULTS } from "@/lib/brand";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import QuotePopup from "@/components/ui/QuotePopup";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "Furnshin — Spaces Designed for Luxury | Interior & Furnishing Solutions Jaipur",
-    template: "%s | Furnshin",
+    default: SEO_DEFAULTS.defaultTitle,
+    template: SEO_DEFAULTS.titleTemplate,
   },
-  description:
-    "Furnshin delivers design-led interior and furnishing solutions for homes and commercial spaces in Jaipur. 30 years of craftsmanship. Glass work, custom furniture, aluminum, iron fabrication.",
+  description: SEO_DEFAULTS.description,
   keywords: [
     "interior design jaipur",
     "furnishing solutions jaipur",
@@ -24,36 +24,36 @@ export const metadata: Metadata = {
     "modular kitchen jaipur",
     "furnshin",
   ],
-  authors: [{ name: "Furnshin" }],
-  creator: "Furnshin",
-  metadataBase: new URL("https://furnshin.com"),
+  authors: [{ name: BRAND.name }],
+  creator: BRAND.name,
+  metadataBase: new URL(SEO_DEFAULTS.canonical),
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: "https://furnshin.com",
-    siteName: "Furnshin",
-    title: "Furnshin — Spaces Designed for Luxury",
-    description:
-      "Design-led interior and furnishing solutions in Jaipur. 30+ years of craftsmanship. Glass work, custom furniture, aluminum solutions, iron fabrication.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Furnshin Interior Solutions Jaipur" }],
-  },
+  openGraph: SEO_DEFAULTS.openGraph,
   twitter: {
     card: "summary_large_image",
-    site: "@furnshin",
-    creator: "@furnshin",
-    title: "Furnshin — Spaces Designed for Luxury",
-    description: "Design-led interior and furnishing solutions in Jaipur. 30+ years craftsmanship.",
+    site: SEO_DEFAULTS.twitter.site,
+    creator: SEO_DEFAULTS.twitter.handle,
+    title: SEO_DEFAULTS.defaultTitle,
+    description: SEO_DEFAULTS.description,
     images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   verification: { google: "furnshin-gsc-verify" },
   icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }],
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
     apple: "/apple-touch-icon.png",
   },
 };
@@ -74,10 +74,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     image: "https://furnshin.com/og-image.jpg",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Petunia 201, Manglam Aananda, Sanganer",
+      streetAddress: "201 Petunia, Manglam Aananda, Sanganer",
       addressLocality: "Jaipur",
       addressRegion: "Rajasthan",
-      postalCode: "302029",
+      postalCode: "302020",
       addressCountry: "IN",
     },
     geo: { "@type": "GeoCoordinates", latitude: BRAND.geo.lat, longitude: BRAND.geo.lng },
@@ -109,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <WhatsAppButton />
+        <QuotePopup />
       </body>
     </html>
   );

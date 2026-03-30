@@ -13,23 +13,20 @@ export interface ApiResponse {
   message: string;
 }
 
-const APPSCRIPT_URL = process.env.NEXT_PUBLIC_APPSCRIPT_URL || "";
+const API_ENDPOINT = "/api/contact";
 
 export async function submitContactForm(data: FormData): Promise<ApiResponse> {
-  if (!APPSCRIPT_URL) {
-    console.warn("AppScript URL not configured. Logging form data:", data);
-    return { success: true, message: "Form submitted (dev mode)" };
-  }
-
   try {
-    const response = await fetch(APPSCRIPT_URL, {
+    const response = await fetch(API_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "contact", ...data, timestamp: new Date().toISOString() }),
     });
 
-    if (!response.ok) throw new Error("Network response was not ok");
-    return { success: true, message: "Message sent successfully!" };
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "Network response was not ok");
+    
+    return { success: true, message: "Message sent! We'll contact you within 24 hours." };
   } catch (error) {
     console.error("Form submission error:", error);
     return { success: false, message: "Failed to send. Please WhatsApp us directly." };
@@ -37,38 +34,34 @@ export async function submitContactForm(data: FormData): Promise<ApiResponse> {
 }
 
 export async function submitQuoteForm(data: FormData): Promise<ApiResponse> {
-  if (!APPSCRIPT_URL) {
-    return { success: true, message: "Quote request submitted (dev mode)" };
-  }
-
   try {
-    const response = await fetch(APPSCRIPT_URL, {
+    const response = await fetch(API_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "quote", ...data, timestamp: new Date().toISOString() }),
     });
 
-    if (!response.ok) throw new Error("Network response was not ok");
-    return { success: true, message: "Quote request sent! We'll contact you within 24 hours." };
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "Network response was not ok");
+    
+    return { success: true, message: "Quote request sent! Redirecting to WhatsApp..." };
   } catch (error) {
     console.error("Quote form error:", error);
-    return { success: false, message: "Failed to send. Please WhatsApp us directly." };
+    return { success: false, message: "Failed to send. Opening WhatsApp anyway." };
   }
 }
 
 export async function submitNewsletterForm(email: string): Promise<ApiResponse> {
-  if (!APPSCRIPT_URL) {
-    return { success: true, message: "Subscribed (dev mode)" };
-  }
-
   try {
-    const response = await fetch(APPSCRIPT_URL, {
+    const response = await fetch(API_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "newsletter", email, timestamp: new Date().toISOString() }),
     });
 
-    if (!response.ok) throw new Error("Network response was not ok");
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "Network response was not ok");
+    
     return { success: true, message: "Subscribed successfully!" };
   } catch (error) {
     console.error("Newsletter form error:", error);
